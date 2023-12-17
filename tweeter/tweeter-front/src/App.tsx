@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      Tweeter Demo
+      <h2>Tweeter Demo</h2>
       <Feed />
     </>
   )

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-const HOST = "http://localhost:8080"
+const HOST = "http://localhost:8080/api/v1"
 
 interface Tweet {
   message: string
+  like: number
 }
 
 const Feed = () => {
-  const [count, setCount] = useState(0)
   const [tweets, setTweets] = useState<Tweet[]>([])
 
   const getTweet = () => {
@@ -31,7 +31,9 @@ const Feed = () => {
     <>
       <div>
         {
-          tweets.map(tweet => <><p>{tweet.message}</p></>)
+          tweets.map(tweet => <>
+            <p>✔️ {tweet.message} 🩵 {tweet.like}</p>
+          </>)
         }
       </div>
     </>
