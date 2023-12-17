@@ -20,6 +20,10 @@ repositories {
 }
 
 dependencies {
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.21")
+
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
@@ -31,6 +35,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.flywaydb:flyway-core")
 
+    // Dev Tools
     implementation("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

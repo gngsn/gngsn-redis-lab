@@ -19,10 +19,11 @@ data class TweetEntity(
     @Column(name = "created_at")
     val createdAt: LocalDateTime
 ) {
-    fun toDomain(): Tweet = Tweet(
-        id = this.id ?: throw IllegalArgumentException(),
+    fun toDomain(like: Long): Tweet = Tweet(
+        id = this.id,
         userId = this.userId,
         message = this.message,
+        like = like,
         createdAt = this.createdAt,
     )
 

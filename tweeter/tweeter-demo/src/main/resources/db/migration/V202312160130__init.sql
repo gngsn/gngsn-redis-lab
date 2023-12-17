@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS tweet_like(
 
 CREATE TABLE IF NOT EXISTS tweet_like_count(
     tweet_id BIGINT PRIMARY KEY,
-    `count` BIGINT NOT NULL
+    count BIGINT NOT NULL
 );
 

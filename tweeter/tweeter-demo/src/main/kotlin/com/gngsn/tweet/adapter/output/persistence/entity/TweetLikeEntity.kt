@@ -1,14 +1,13 @@
 package com.gngsn.tweet.adapter.output.persistence.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
+import java.io.Serializable
 import java.time.LocalDateTime
 
 
 @Entity
 @Table(name = "tweet_like")
+@IdClass(TweetLikeEntity.CompositeKey::class)
 data class TweetLikeEntity(
     @Id
     @Column(name = "tweet_id")
@@ -19,5 +18,12 @@ data class TweetLikeEntity(
     val userId: Long,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime
-)
+    val createdAt: LocalDateTime = LocalDateTime.now()
+) {
+
+    @Embeddable
+    data class CompositeKey(
+        private val tweetId: Long,
+        private val userId: Long,
+    ) : Serializable
+}
