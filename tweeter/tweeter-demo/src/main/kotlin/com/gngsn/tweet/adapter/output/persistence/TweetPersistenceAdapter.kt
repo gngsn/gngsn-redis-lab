@@ -15,17 +15,16 @@ import com.gngsn.tweet.support.Adapter
 class TweetPersistenceAdapter(
     private val tweetPersistenceRepository: TweetPersistenceRepository,
     private val tweetLikePersistenceRepository: TweetLikePersistenceRepository,
-//    private val tweetLikeCountPersistenceRepository: TweetLikeCountPersistenceRepository,
     private val tweetLikeCountRedisRepository: TweetLikeCountRedisRepository,
 ) : GetAllTweetOutputPort,
     SaveTweetOutputPort,
     SaveTweetLikeOutputPort {
 
     override fun get(): List<Tweet> {
-        val likeSet = tweetLikeCountRedisRepository.findTopN()
-        val findAll = tweetPersistenceRepository.findAll()
-        return listOf()
-//        return findAll.map { it.toDomain(likeSet.associateBy { it } [it.id]?.count ?: 0) }
+        val likeMap = tweetLikeCountRedisRepository.findAll().associate { it.value to it.score }
+
+        return tweetPersistenceRepository.findAll()
+            .map { it.toDomain(likeMap.getOrDefault(it.id, 0.0).toLong()) }
     }
 
     override fun save(tweet: Tweet) {

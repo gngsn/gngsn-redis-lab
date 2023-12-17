@@ -8,6 +8,8 @@ import org.springframework.data.redis.connection.jedis.JedisClientConfiguration
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
+import org.springframework.data.redis.serializer.StringRedisSerializer
+
 
 @Configuration
 class RedisConfiguration {
@@ -18,14 +20,16 @@ class RedisConfiguration {
     @Value("\${spring.data.redis.port}")
     lateinit var redisPort: String
 
-//    @Value("\${spring.data.redis.topic}")
-//    lateinit var redisTopic: String
-
     @Bean
     fun redisTemplate(): RedisTemplate<String, Any> {
         val template: RedisTemplate<String, Any> = RedisTemplate()
         template.setConnectionFactory(jedisConnectionFactory())
+
+        template.keySerializer = StringRedisSerializer()
         template.valueSerializer = GenericJackson2JsonRedisSerializer()
+        template.hashKeySerializer = StringRedisSerializer()
+        template.hashValueSerializer = GenericJackson2JsonRedisSerializer()
+
         return template
     }
 
@@ -39,18 +43,4 @@ class RedisConfiguration {
         factory.afterPropertiesSet()
         return factory
     }
-
-//    @Bean  TODO 알아보기
-//    fun topic(): ChannelTopic = ChannelTopic(redisTopic)
-//
-//    @Bean
-//    fun newMessageListener(): MessageListenerAdapter = MessageListenerAdapter(messageListener)
-//
-//    @Bean
-//    fun redisContainer(): RedisMessageListenerContainer {
-//        val container = RedisMessageListenerContainer()
-//        container.setConnectionFactory(jedisConnectionFactory())
-//        container.addMessageListener(newMessageListener(), topic())
-//        return container
-//    }
 }

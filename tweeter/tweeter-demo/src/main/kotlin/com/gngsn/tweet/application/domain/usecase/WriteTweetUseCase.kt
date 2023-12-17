@@ -13,7 +13,8 @@ class WriteTweetUseCase(
     override fun write(userId: Long, message: String) {
         return saveTweetOutputPort.save(
             Tweet(
-                userId = userId, message = message
+                userId = userId,
+                message = message
             )
         )
     }

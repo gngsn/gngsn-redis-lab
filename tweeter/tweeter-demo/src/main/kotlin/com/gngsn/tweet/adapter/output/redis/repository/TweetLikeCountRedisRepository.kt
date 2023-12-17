@@ -1,22 +1,36 @@
 package com.gngsn.tweet.adapter.output.redis.repository
 
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.core.ZSetOperations.TypedTuple
 import org.springframework.stereotype.Repository
+
+const val TWEET_LIKE_KEY = "tweet:likes"
 
 @Repository
 class TweetLikeCountRedisRepository(
     private val redisTemplate: RedisTemplate<String, Any>,
 ) {
-
-    val KEY = "tweet:likes"
-
     fun zadd(tweetId: Long, score: Double) {
-        redisTemplate.opsForZSet().incrementScore(KEY, tweetId, 1.0)
+        redisTemplate.opsForZSet().incrementScore(TWEET_LIKE_KEY, tweetId, 1.0)
     }
 
-    fun findTopN(n: Long = 1000): Set<Long> {
+    fun findAll(n: Long = -1): Set<ScoreValue> {
         val reverseRange = redisTemplate.opsForZSet()
-            .reverseRange(KEY, 0, n)
-        return reverseRange as Set<Long>? ?: setOf()
+            .rangeWithScores(TWEET_LIKE_KEY, 0, -1)
+        return reverseRange?.map { ScoreValue.of(it) }?.toSet() ?: setOf()
+    }
+
+    data class ScoreValue(
+        val score: Double,
+        val value: Long,
+    ) {
+        companion object {
+            fun of(o: TypedTuple<Any>): ScoreValue =
+                ScoreValue(
+                    o.score ?: throw IllegalArgumentException(),
+                    (o.value as Int).toLong(),
+                )
+
+        }
     }
 }
