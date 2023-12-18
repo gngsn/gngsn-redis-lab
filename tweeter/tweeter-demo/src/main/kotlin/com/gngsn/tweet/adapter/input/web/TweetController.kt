@@ -1,6 +1,7 @@
 package com.gngsn.tweet.adapter.input.web
 
 import com.gngsn.tweet.application.domain.model.Tweet
+import com.gngsn.tweet.application.port.input.DeleteTweetInputPort
 import com.gngsn.tweet.application.port.input.GetAllTweetInputPort
 import com.gngsn.tweet.application.port.input.LikeTweetInputPort
 import com.gngsn.tweet.application.port.input.WriteTweetInputPort
@@ -12,6 +13,7 @@ class TweetController(
     private val getAllTweetInputPort: GetAllTweetInputPort,
     private val writeTweetInputPort: WriteTweetInputPort,
     private val likeTweetLikeTweetInputPort: LikeTweetInputPort,
+    private val deleteTweetInputPort: DeleteTweetInputPort
 ) {
 
     @GetMapping
@@ -27,6 +29,11 @@ class TweetController(
     @PostMapping("/like/{tweetId}")
     fun like(@PathVariable tweetId: Long, @RequestHeader userId: Long) {
         likeTweetLikeTweetInputPort.like(tweetId, userId)
+    }
+
+    @DeleteMapping("/{tweetId}")
+    fun like(@PathVariable tweetId: Long) {
+        deleteTweetInputPort.delete(tweetId)
     }
 
     data class WriteDto(

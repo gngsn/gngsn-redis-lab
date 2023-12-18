@@ -20,6 +20,10 @@ class TweetLikeCountRedisRepository(
         return reverseRange?.map { ScoreValue.of(it) }?.toSet() ?: setOf()
     }
 
+    fun remove(tweetId: Long) {
+        redisTemplate.opsForZSet().remove(TWEET_LIKE_KEY, tweetId)
+    }
+
     data class ScoreValue(
         val score: Double,
         val value: Long,
