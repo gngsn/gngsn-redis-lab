@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tweeter-demo-manual
+spec:
+  containers:
+    - image: gngsn/tweeter-demo
+      name: tweeter-demo
+      ports:
+        - containerPort: 8080
+          protocol: TCP
