@@ -128,6 +128,26 @@ NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 postgres           0/1     1            0           52s
 ```
 
+4. Service 작성
+
+```
+❯ kubectl apply -f postgres-service.yaml
+
+service/postgres created
+❯ kubectl get all
+NAME                                   READY   STATUS             RESTARTS   AGE
+pod/postgres-7b8bfb4588-lgjtz          1/1     Running            0          10m
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/postgres     NodePort    10.100.116.77   <none>        5432:31146/TCP   26s
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/postgres           1/1     1            1           10m
+
+NAME                                         DESIRED   CURRENT   READY   AGE
+replicaset.apps/postgres-7b8bfb4588          1         1         1       10m
+```
+
 
 
 

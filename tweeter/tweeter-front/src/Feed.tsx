@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const HOST = "http://localhost:8080/api/v1"
@@ -75,7 +75,7 @@ const Feed = () => {
                 {
                     feed.map(tweet =>
                         <div key={tweet.id}
-                             style={{display: 'flex', gap: '5px', alignItems: 'center', margin: '10px 0'}}>
+                              style={{display: 'flex', gap: '5px', alignItems: 'center', margin: '10px 0'}}>
                             <h3 style={{marginRight: '30px'}}>✔️ &nbsp;{tweet.message}</h3>
                             <button onClick={_ => {
                                 clickLike(tweet.id)
