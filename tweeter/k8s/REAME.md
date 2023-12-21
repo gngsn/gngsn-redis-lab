@@ -107,7 +107,16 @@ postgres-config-map   3      7s
 ```
 
 2. PersistentVolume 생성
-3. 
+
+```
+❯ kubectl apply -f postgres-config.yaml
+configmap/postgres-config-map unchanged
+persistentvolume/postgres-pv-volume created
+persistentvolumeclaim/postgres-pv-claim created
+❯ kubectl get pvc
+NAME                STATUS   VOLUME               CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+postgres-pv-claim   Bound    postgres-pv-volume   5Gi        RWX            manual         39s
+```
 
 
 
