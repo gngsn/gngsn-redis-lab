@@ -90,9 +90,24 @@ nginx-deployment-cbdccf466-kmmkl   1/1     Running            2          36d
 tweeter-demo-manual                0/1     ImagePullBackOff   0          2m25s
 ```
 
+---
 
+#### Postgres 설정
 
+1. postgres-config-map 작성
+2. postgres-configmap 생성
 
+```
+❯ kubectl apply -f postgres-configmap.yaml
+configmap/postgres-config-map created
+❯ kubectl get configmap
+NAME                  DATA   AGE
+kube-root-ca.crt      1      46d
+postgres-config-map   3      7s
+```
+
+2. PersistentVolume 생성
+3. 
 
 
 

@@ -2,7 +2,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-config-map
+  labels:
+    app: postgres
 data:
-  mysql-server: postgres            # The name of postgres service
-  mysql-database-name: tweet        # The name of the database used by app
-  mysql-user-username: postgres     # A new created user for the app
+  POSTGRES_DB: tweet             # The name of the database used by app
+  POSTGRES_USER: postgres        # A new created user for the app
+  POSTGRES_PASSWORD: postgres    # A password for new created user
+#kubectl apply -f postgres-config.yaml
