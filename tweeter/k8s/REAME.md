@@ -118,6 +118,15 @@ NAME                STATUS   VOLUME               CAPACITY   ACCESS MODES   STOR
 postgres-pv-claim   Bound    postgres-pv-volume   5Gi        RWX            manual         39s
 ```
 
+3. Deployment 작성
+
+```
+❯ kubectl apply -f postgres-deployment.yaml
+deployment.apps/postgres created
+❯ kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+postgres           0/1     1            0           52s
+```
 
 
 
