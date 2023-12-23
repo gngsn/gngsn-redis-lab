@@ -1,4 +1,4 @@
-package com.gngsn.tweet.application.domain.usecase
+package com.gngsn.tweet.application.usecase
 
 import com.gngsn.tweet.application.domain.model.Tweet
 import com.gngsn.tweet.application.port.input.WriteTweetInputPort

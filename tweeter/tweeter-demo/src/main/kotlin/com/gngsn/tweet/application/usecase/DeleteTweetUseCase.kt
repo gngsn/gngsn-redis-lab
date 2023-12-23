@@ -1,8 +1,9 @@
-package com.gngsn.tweet.application.domain.usecase
+package com.gngsn.tweet.application.usecase
 
 import com.gngsn.tweet.application.port.input.DeleteTweetInputPort
 import com.gngsn.tweet.application.port.output.DeleteTweetOutputPort
 import com.gngsn.tweet.support.UseCase
+
 
 @UseCase
 class DeleteTweetUseCase(
