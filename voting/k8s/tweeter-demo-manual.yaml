@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: voting-demo-manual
+spec:
+  containers:
+    - image: gngsn/voting-demo
+      name: voting-demo
+      ports:
+        - containerPort: 8080
+          protocol: TCP
