@@ -4,15 +4,16 @@ import com.gngsn.voting.adapter.output.redis.constant.UNVOTE
 import com.gngsn.voting.adapter.output.redis.constant.VOTE
 import com.gngsn.voting.adapter.output.redis.constant.VOTE_OPTION_KEY
 import com.gngsn.voting.application.port.output.DoRevoteOutputPort
-import com.gngsn.voting.support.configuration.redis.RedisTemplateContainer
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
 
 
 @Repository
-class VoteOptionRedisRepository(
-    redisTemplateCon: RedisTemplateContainer
+class VoteOptionRedisAdapter(
+//    redisTemplateCon: RedisTemplateContainer
+    redisTemplate: RedisTemplate<String, Long>
 ) {
-    private val operator = redisTemplateCon.DB0.opsForHash<String, Long>()
+    private val operator = redisTemplate.opsForHash<String, Long>()
 
     fun vote(voteId: Long, optionId: Int) {
         operator.increment(voteKey(voteId), voteHashKey(optionId), VOTE)
