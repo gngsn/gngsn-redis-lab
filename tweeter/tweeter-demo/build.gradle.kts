@@ -29,7 +29,6 @@ dependencies {
 
     // Redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("redis.clients:jedis:4.4.1")
 
     // DB; Postgres
     runtimeOnly("org.postgresql:postgresql")
