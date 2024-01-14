@@ -151,12 +151,13 @@ replicaset.apps/postgres-7b8bfb4588          1         1         1       10m
 5. Postgresql 접속
 
 ```
-❯ kubectl exec -it postgres-7b8bfb4588-lgjtz --  psql -h localhost -U postgres --password -p 5432 tweet
+❯ kubectl exec -it postgres-7b8bfb4588-lgjtz --  psql -h localhost -U postgres --password -p 5432 voting
 Password for user postgres: 
 psql (10.1)
 Type "help" for help.
 
-tweet=# 
+voting=# 
 ```
 
+[Ref](https://www.airplane.dev/blog/deploy-postgres-on-kubernetes)
 
