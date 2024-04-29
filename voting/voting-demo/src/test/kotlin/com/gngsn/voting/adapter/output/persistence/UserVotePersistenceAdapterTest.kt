@@ -19,14 +19,11 @@ class VoteOptionRedisRepositoryTest {
 
     @BeforeEach
     fun setUp() {
-//        redis-counter-qaiy4g.serverless.apn2.cache.amazonaws.com:6379
         val redisProperties = RedisProperties()
-        redisProperties.host = "redis-counter-qaiy4g.serverless.apn2.cache.amazonaws.com"
+        redisProperties.host = "localhost"
         redisProperties.port = 6379
         redisProperties.database = 4
         val testRedisConfiguration = RedisConfiguration(redisProperties)
-
-//        val lettuceConnectionFactory = testRedisConfiguration.lettuceConnectionFactory()
 
         redisTemplate = testRedisConfiguration.redisTemplate() as RedisTemplate<String, Long>
         voteOptionRedisAdapter = VoteOptionRedisAdapter(redisTemplate)
